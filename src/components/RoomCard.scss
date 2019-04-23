@@ -1,0 +1,10 @@
+.room-card{
+  width: 24%;
+  margin: 0.5%;
+  box-shadow: 0px 1px 10px 1px #ccc;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+.room-card:hover{
+  transform: translateY(-7px);
+}

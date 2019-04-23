@@ -6,17 +6,6 @@ const express = require('express'),
 
 mongoose.connect('mongodb://localhost/hotel', {useNewUrlParser: true});
 
-// Room.create({
-//   name: 'Family Suite',
-//   price: 169.99,
-//   maxOccupancy: 8,
-//   amenities: { beds: { size: 'Twin', twinBedCount: 2, size: 'Queen', queenBedCount: 2, size: 'Full', queenBedCount: 1  }, microwave: true, refrigerator: true, ac: true }
-// }, (room, err) => {
-//   if (err) console.log('error creating room: ', err);
-//
-//   console.log('created room: ', room)
-// });
-
 app.get('/api', (req, res) => {
   Room.find({}, (err, rooms) => {
     if (err) {
