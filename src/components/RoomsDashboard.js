@@ -1,25 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import RoomCard from './RoomCard'
-import './RoomsDashboard.scss'
+import RoomCard from './RoomCard';
+import './RoomsDashboard.scss';
 
 const RoomsDashboard = (props) => {
+  const roomsList = props.rooms.map(room => {
+    return (
+      <RoomCard key={room._id} room={room} />
+    )
+  })
   return (
     <div className="rooms-dashboard-container">
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
+      {roomsList}
     </div>
   )
 }
 
-export default RoomsDashboard;
+const mapStateToProps = (state) => {
+  return {
+    rooms: state.rooms
+  }
+}
+
+export default connect(mapStateToProps)(RoomsDashboard);
