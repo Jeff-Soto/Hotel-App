@@ -7,13 +7,44 @@ import './RoomsDashboard.scss';
 
 class RoomsDashboard extends React.Component{
 
+  state = {
+    nameValue: '',
+    priceValue: '',
+    maxOccupancyValue: '',
+    amenities: {}
+  }
+
   handleAddRoom = (e) => {
     e.preventDefault();
     console.log("Add Room Triggered")
   }
 
+  updateNameValue = (val) => {
+    this.setState({ nameValue: val.target.value})
+  }
+
+  updatePriceValue = (val) => {
+    this.setState({ priceValue: val.target.value})
+  }
+
+  updateMaxOccupancyValue = (val) => {
+    this.setState({ maxOccupancyValue: val.target.value})
+  }
+
+  updateAmenities = (val) => {
+    let key = val.target.id;
+    let el = document.querySelector('#' + key);
+    let isChecked = el.checked;
+
+    this.setState(prevState => ({
+      amenities: { ...prevState.amenities, [key]: isChecked }
+    }));
+  }
+
   render(){
-    const roomsList = this.props.rooms.map(room => {
+    const { rooms } = this.props;
+    const { nameValue, priceValue, maxOccupancyValue, amenities } = this.state;
+    const roomsList = rooms.map(room => {
       return (
         <RoomCard key={room._id} room={room} />
       )
@@ -24,7 +55,19 @@ class RoomsDashboard extends React.Component{
           <AddRoomButton />
         </div>
         {roomsList}
-        <AddRecordModal modalTitle="Add a Room" handleAddRoom={this.handleAddRoom}/>
+        <AddRecordModal
+          modalTitle="Add a Room"
+          handleAddRoom={this.handleAddRoom}
+          nameValue={nameValue}
+          priceValue={priceValue}
+          maxOccupancyValue={maxOccupancyValue}
+          amenities={amenities}
+          updateAmenities={this.updateAmenities}
+          updateNameValue={this.updateNameValue}
+          updatePriceValue={this.updatePriceValue}
+          updateMaxOccupancyValue={this.updateMaxOccupancyValue}
+          updateAmenities={this.updateAmenities}
+        />
       </div>
     )
   }
