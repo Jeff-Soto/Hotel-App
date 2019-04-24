@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RoomCard from './RoomCard';
+import AddRoomButton from './AddRoomButton';
 import './RoomsDashboard.scss';
 
 const RoomsDashboard = (props) => {
@@ -11,6 +12,7 @@ const RoomsDashboard = (props) => {
   })
   return (
     <div className="rooms-dashboard-container">
+      <AddRoomButton />
       {roomsList}
     </div>
   )
