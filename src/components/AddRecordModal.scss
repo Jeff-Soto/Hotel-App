@@ -3,7 +3,20 @@
     padding: 20px;
   }
 
-  // label, button{
-  //   float: left;
-  // }
+  .amenities-container{
+    margin-bottom: 10px;
+  }
+
+  label[for="name"], label[for="price"], label[for="amenities"]{
+    display: block;
+    text-align: left;
+  }
+
+  button[type="submit"]{
+    width: 100%;
+  }
+
+  .form-check{
+    text-align: left;
+  }
 }

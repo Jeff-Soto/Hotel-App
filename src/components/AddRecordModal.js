@@ -23,10 +23,9 @@ const AddRecordModal = (props) => {
                   <label for="price">Price: </label>
                   <input type="number" class="form-control" id="price" placeholder="ex: 99.99 or 120" />
                 </div>
-                <div className="row">
-
+                <div className="row amenities-container">
                   <div className="col-12">
-                    <label>Amenities: </label>
+                    <label for="amenities">Amenities: </label>
                   </div>
                   <div className="col-6">
                     <div class="form-group">
