@@ -1,6 +1,15 @@
 .add-record-modal{
-  #addRecordModal .modal-body{
-    padding: 20px;
+  #addRecordModal{
+    .modal-content{
+      border: none;
+    }
+    .modal-body{
+      padding: 20px;
+    }
+    .modal-header{
+      color: #007bff;
+      padding-bottom: 4px;
+    }
   }
 
   .amenities-container{
@@ -14,6 +23,13 @@
 
   button[type="submit"]{
     width: 100%;
+  }
+
+  button[type="button"]{
+    color: white;
+    background: #007bff;
+    opacity: 1;
+    outline: none;
   }
 
   .form-check{

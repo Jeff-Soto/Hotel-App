@@ -8,7 +8,7 @@ const AddRecordModal = (props) => {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">{props.modalTitle}</h5>
+              <h4 className="modal-title" id="exampleModalLabel">{props.modalTitle}</h4>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -22,6 +22,10 @@ const AddRecordModal = (props) => {
                 <div class="form-group">
                   <label for="price">Price: </label>
                   <input type="number" class="form-control" id="price" placeholder="ex: 99.99 or 120" />
+                </div>
+                <div class="form-group">
+                  <label for="price">Max Occupancy: </label>
+                  <input type="number" class="form-control" id="occupancy" placeholder="ex: 1 or 10" />
                 </div>
                 <div className="row amenities-container">
                   <div className="col-12">
