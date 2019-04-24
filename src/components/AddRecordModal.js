@@ -99,7 +99,7 @@ class AddRecordModal extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <button type="submit" className="btn btn-primary">Submit</button>
+                  <button type="submit" className="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Submit</button>
                 </form>
               </div>
             </div>

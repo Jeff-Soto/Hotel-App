@@ -9,7 +9,7 @@ const axios = require('axios');
 class App extends Component {
 
   componentWillMount(){
-    axios.get('/api')
+    axios.get('/api/rooms')
     .then(response => {
       this.props.getAllRooms(response.data);
     })

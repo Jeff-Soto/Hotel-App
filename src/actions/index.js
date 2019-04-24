@@ -4,3 +4,9 @@ export const getAllRooms = (rooms) => {
     payload: { rooms }
   }
 }
+export const addRoom = (room) => {
+  return {
+    type: 'ADD_ROOM',
+    payload: { room }
+  }
+}

@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import RoomCard from './RoomCard';
 import AddRoomButton from './AddRoomButton';
 import AddRecordModal from './AddRecordModal';
+import { addRoom } from '../actions'
 import './RoomsDashboard.scss';
+const axios = require('axios');
 
 class RoomsDashboard extends React.Component{
 
@@ -16,7 +18,22 @@ class RoomsDashboard extends React.Component{
 
   handleAddRoom = (e) => {
     e.preventDefault();
-    console.log("Add Room Triggered")
+    axios.post('/api/rooms', {
+      name: this.state.nameValue,
+      price: this.state.priceValue,
+      maxOccupancy: this.state.maxOccupancyValue,
+      amenities: this.state.amenities
+    })
+    .then(response => {
+      this.props.addRoom(response.data);
+      this.setState({
+        nameValue: '',
+        priceValue: '',
+        maxOccupancyValue: '',
+        amenities: {}
+      })
+    })
+    .catch(err => console.log(err));
   }
 
   updateNameValue = (val) => {
@@ -66,7 +83,6 @@ class RoomsDashboard extends React.Component{
           updateNameValue={this.updateNameValue}
           updatePriceValue={this.updatePriceValue}
           updateMaxOccupancyValue={this.updateMaxOccupancyValue}
-          updateAmenities={this.updateAmenities}
         />
       </div>
     )
@@ -79,4 +95,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(RoomsDashboard);
+export default connect(mapStateToProps, { addRoom })(RoomsDashboard);
