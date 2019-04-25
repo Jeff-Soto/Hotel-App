@@ -3,9 +3,9 @@ import { combineReducers } from 'redux';
 export const roomReducer = (rooms = [], {type, payload}) => {
   switch (type){
     case 'GET_ALL_ROOMS':
-      return payload.rooms;
+      return payload;
     case 'ADD_ROOM':
-      return [...rooms, payload.room];
+      return [...rooms, payload];
     default:
       return rooms;
   }

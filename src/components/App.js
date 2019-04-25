@@ -4,16 +4,11 @@ import { getAllRooms } from '../actions';
 import './App.scss';
 import Header from './Header';
 import RoomsDashboard from './RoomsDashboard';
-const axios = require('axios');
 
 class App extends Component {
 
   componentWillMount(){
-    axios.get('/api/rooms')
-    .then(response => {
-      this.props.getAllRooms(response.data);
-    })
-    .catch(err => console.log(err));
+    this.props.getAllRooms();
   }
 
   render() {
