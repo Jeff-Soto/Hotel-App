@@ -3,30 +3,35 @@ import { connect } from 'react-redux';
 import RoomCard from './RoomCard';
 import AddRoomButton from './AddRoomButton';
 import AddRecordModal from './AddRecordModal';
-import { addRoom, getAllRooms, deleteRoom } from '../actions'
+import ReservationModal from './ReservationModal';
+import { addRoom, getAllRooms, deleteRoom } from '../actions';
 import swal from 'sweetalert';
 import './RoomsDashboard.scss';
 
 class RoomsDashboard extends React.Component{
 
   state = {
-    nameValue: '',
+    roomName: '',
     priceValue: '',
     maxOccupancyValue: '',
-    amenities: {}
+    amenities: {},
+    reservationName: '',
+    startDate: new Date(),
+    endDate: '',
+    emailValue: '',
   }
 
   handleAddRoom = (e) => {
     e.preventDefault();
     this.props.addRoom({
-      name: this.state.nameValue,
+      name: this.state.roomName,
       price: this.state.priceValue,
       maxOccupancy: this.state.maxOccupancyValue,
       amenities: this.state.amenities
     });
     this.props.getAllRooms();
     this.setState({
-      nameValue: '',
+      roomName: '',
       priceValue: '',
       maxOccupancyValue: '',
       amenities: {}
@@ -54,12 +59,18 @@ class RoomsDashboard extends React.Component{
     });
   }
 
-  updateNameValue = (val) => {
-    this.setState({ nameValue: val.target.value})
+  updateRoomName = (val) => {
+    this.setState({ roomName: val.target.value})
+  }
+  updateReservationName = (val) => {
+    this.setState({ reservationName: val.target.value})
   }
 
   updatePriceValue = (val) => {
     this.setState({ priceValue: val.target.value})
+  }
+  updateEmailValue = (val) => {
+    this.setState({ emailValue: val.target.value})
   }
 
   updateMaxOccupancyValue = (val) => {
@@ -78,7 +89,7 @@ class RoomsDashboard extends React.Component{
 
   render(){
     const { rooms } = this.props;
-    const { nameValue, priceValue, maxOccupancyValue, amenities } = this.state;
+    const { roomName, priceValue, maxOccupancyValue, amenities, reservationName, startDate, endDate } = this.state;
     const roomsList = rooms.map(room => {
       return (
         <RoomCard key={room._id} room={room} deleteRoom={this.handleDeleteRoom} />
@@ -93,14 +104,21 @@ class RoomsDashboard extends React.Component{
         <AddRecordModal
           modalTitle="Add a Room"
           handleAddRoom={this.handleAddRoom}
-          nameValue={nameValue}
+          nameValue={roomName}
           priceValue={priceValue}
           maxOccupancyValue={maxOccupancyValue}
           amenities={amenities}
           updateAmenities={this.updateAmenities}
-          updateNameValue={this.updateNameValue}
+          updateNameValue={this.updateRoomName}
           updatePriceValue={this.updatePriceValue}
           updateMaxOccupancyValue={this.updateMaxOccupancyValue}
+        />
+      <ReservationModal
+          modalTitle="Create Reservation"
+          nameValue={reservationName}
+          updateReservationName={this.updateReservationName}
+          emailValue={this.state.emailValue}
+          updateEmailValue={this.updateEmailValue}
         />
       </div>
     )
