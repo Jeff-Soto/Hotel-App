@@ -28,6 +28,14 @@ app.post('/api/rooms', (req, res) => {
     res.send(room);
   });
 });
+app.delete('/api/rooms/:id', (req, res) => {
+  Room.findByIdAndRemove(req.params.id, (err, deleteRoom) => {
+    if (err) {
+      console.log("Error attempting to delete room: ", err);
+    }
+    res.send(req.params.id);
+  })
+});
 
 app.listen(3001, () => {
   console.log('server listening')

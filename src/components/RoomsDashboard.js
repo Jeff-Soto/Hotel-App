@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import RoomCard from './RoomCard';
 import AddRoomButton from './AddRoomButton';
 import AddRecordModal from './AddRecordModal';
-import { addRoom, getAllRooms } from '../actions'
+import { addRoom, getAllRooms, deleteRoom } from '../actions'
+import swal from 'sweetalert';
 import './RoomsDashboard.scss';
 
 class RoomsDashboard extends React.Component{
@@ -29,6 +30,27 @@ class RoomsDashboard extends React.Component{
       priceValue: '',
       maxOccupancyValue: '',
       amenities: {}
+    });
+  }
+
+  handleDeleteRoom = (e) => {
+    e.preventDefault();
+    let deleteID = e.target.dataset.id;
+    swal({
+      title: "Are you sure?",
+      text: "This room will be permanently deleted.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.props.deleteRoom(deleteID);
+        this.props.getAllRooms();
+        swal("Ok, Room has been deleted!", {
+          icon: "success",
+        });
+      }
     });
   }
 
@@ -59,7 +81,7 @@ class RoomsDashboard extends React.Component{
     const { nameValue, priceValue, maxOccupancyValue, amenities } = this.state;
     const roomsList = rooms.map(room => {
       return (
-        <RoomCard key={room._id} room={room} />
+        <RoomCard key={room._id} room={room} deleteRoom={this.handleDeleteRoom} />
       )
     })
     return (
@@ -91,4 +113,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addRoom, getAllRooms })(RoomsDashboard);
+export default connect(mapStateToProps, { addRoom, getAllRooms, deleteRoom })(RoomsDashboard);

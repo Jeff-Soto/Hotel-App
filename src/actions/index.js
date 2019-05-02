@@ -9,3 +9,8 @@ export const addRoom = room => async dispatch => {
   const response = await axios.post('/api/rooms', room);
   dispatch({ type: 'ADD_ROOM', payload: response.data });
 };
+
+export const deleteRoom = roomID => async (dispatch) => {
+    const response = await axios.delete('/api/rooms/' + roomID);
+    dispatch({ type: 'DELETE_ROOM', payload: response});
+};
